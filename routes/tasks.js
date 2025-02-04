@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Task = require('../models/Task')
-const { triggerAsyncId } = require('async_hooks')
 
 //POST /create: Endpoint para crear una tarea.
 router. post('/create', async (req,res) => {
