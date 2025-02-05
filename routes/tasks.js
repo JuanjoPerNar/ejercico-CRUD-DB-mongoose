@@ -6,10 +6,10 @@ const Task = require('../models/Task')
 router. post('/create', async (req,res) => {
     try {
         const task = await Task.create(req.body)
-        res.status(201).send(task)
+        res.status(201).json(task)
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'There was a problem trying to create a task'})
+        res.status(500).json({message: 'There was a problem trying to create a task'})
     }
 })
 
@@ -17,10 +17,10 @@ router. post('/create', async (req,res) => {
 router.get('/', async (req, res) => {
     try {
         const tasks = await Task.find()
-        res.status(200).send(tasks)
+        res.status(200).json(tasks)
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'Error gettings taks'})
+        res.status(500).json({message: 'Error gettings taks'})
     }
 })
 
@@ -29,12 +29,12 @@ router.get('/id/:_id', async (req, res) => {
     try {
         const task = await Task.findById(req.params._id)
         if (!task) {
-            return res.status(404).send({message: 'Task not found'})
+            return res.status(404).json({message: 'Task not found'})
         }
-        res.status(200).send(task)
+        res.status(200).json(task)
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'Error getting task'})
+        res.status(500).json({message: 'Error getting task'})
     }
 })
 
@@ -43,12 +43,12 @@ router.put('/markAsCompleted/:_id', async (req, res) => {
     try {
         const task = await Task.findByIdAndUpdate(req.params._id, {completed: true}, {new: true})
         if (!task) {
-            return res.status(404).send({message: 'Task not found'})
+            return res.status(404).json({message: 'Task not found'})
         }
-        res.status(200).send(task)
+        res.status(200).json(task)
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'Error marking task'})
+        res.status(500).json({message: 'Error marking task'})
     }
 })
 
@@ -57,12 +57,12 @@ router.put('/id/:_id', async (req, res) => {
     try {
         const task = await Task.findByIdAndUpdate(req.params._id, {title: req.body.title}, {new: true})
         if (!task) {
-            return res.status(404).send({message: 'Task not found'})
+            return res.status(404).json({message: 'Task not found'})
         }
-        res.status(200).send(task)
+        res.status(200).json(task)
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'Error updating title'})
+        res.status(500).json({message: 'Error updating title'})
     }
 })
 
@@ -71,12 +71,12 @@ router.delete('/id/:_id', async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params._id)
         if (!task) {
-            return res.status(404).send({message: 'Task not found'})
+            return res.status(404).json({message: 'Task not found'})
         }
-        res.status(200).send({message: 'Task deleted successfully'})
+        res.status(200).json({message: 'Task deleted successfully'})
     } catch (error) {
         console.error(error)
-        res.status(500).send({message: 'Error deleting task'})
+        res.status(500).json({message: 'Error deleting task'})
     }
 })
 

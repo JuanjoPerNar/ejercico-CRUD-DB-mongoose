@@ -5,6 +5,7 @@ const { dbConnection } = require('./config/config')
 const routes = require('./routes/tasks')
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
 
 app.use('/', routes)
 
